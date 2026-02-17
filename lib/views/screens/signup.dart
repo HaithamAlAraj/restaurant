@@ -1,31 +1,31 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:restaurant/views/screens/forgot_password.dart';
 import 'package:restaurant/views/screens/home.dart';
-import 'package:restaurant/views/screens/signup.dart';
+import 'package:restaurant/views/screens/login.dart';
 import 'package:restaurant/views/widgets/media_login_button.dart';
 import 'package:restaurant/views/widgets/text_field.dart';
 import 'package:sizer/sizer.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  bool rememberMe = false;
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       Get.snackbar(
-        "Login Successful",
-        "Welcome back, ${_emailController.text}!",
+        "Signup Successful",
+        "Welcome, ${_emailController.text}!",
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.green,
         colorText: Colors.white,
@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 22.h,
               ),
               Text(
-                "Sign in your account",
+                "Sign up your account",
                 style: TextStyle(fontSize: 18.sp, color: Colors.black),
               ),
               SizedBox(height: 2.h),
@@ -73,27 +73,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       controller: _passwordController,
                       fieldType: "Password",
                     ),
-                    SizedBox(height: 0.5.h),
-                    Padding(
-                      padding: EdgeInsets.only(left: 2.w),
-                      child: Row(
-                        children: [
-                          Checkbox(
-                            value: rememberMe,
-                            onChanged: (value) => setState(() {
-                              rememberMe = value ?? false;
-                            }),
-                            checkColor: Colors.white,
-                            activeColor: Colors.blue,
-                            splashRadius: 0,
-                            side: BorderSide(width: 0.5, color: Colors.grey),
-                          ),
-                          Text(
-                            "Remember me",
-                            style: TextStyle(fontSize: 15.sp),
-                          ),
-                        ],
-                      ),
+                    SizedBox(height: 3.h),
+                    CustomTextFormField(
+                      controller: _confirmPasswordController,
+                      fieldType: "Confirm Password",
                     ),
                     SizedBox(height: 1.h),
                     TextButton(
@@ -109,38 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(6.w),
                         ),
                       ),
-                      child: Text("SIGN IN", style: TextStyle(fontSize: 17.sp)),
-                    ),
-                    SizedBox(height: 2.5.h),
-                    RichText(
-                      text: TextSpan(
-                        text: "Forgot Password?",
-                        style: TextStyle(fontSize: 15.sp, color: Colors.blue),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Get.to(() => const ForgotPasswordScreen());
-                          },
-                      ),
-                    ),
-                    SizedBox(height: 2.5.h),
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 3.5.h),
-                      child: Row(
-                        //TODO: Add divider lines on both sides of the text
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 2.w),
-                            child: Text(
-                              "or continue with",
-                              style: TextStyle(
-                                fontSize: 15.sp,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                      child: Text("NEXT", style: TextStyle(fontSize: 17.sp)),
                     ),
                     SizedBox(height: 2.h),
                     Row(
@@ -162,18 +114,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(height: 2.5.h),
                     RichText(
                       text: TextSpan(
-                        text: "Don't have an account? ",
+                        text: "Already have an account? ",
                         style: TextStyle(fontSize: 15.sp, color: Colors.grey),
                         children: [
                           TextSpan(
-                            text: "Sign up",
+                            text: "Sign in",
                             style: TextStyle(
                               fontSize: 15.sp,
                               color: Colors.blue,
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Get.to(() => const SignupScreen());
+                                Get.to(() => const LoginScreen());
                               },
                           ),
                         ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:restaurant/views/screens/login.dart';
 import 'package:sizer/sizer.dart';
 
 class IntroductionScreen extends StatelessWidget {
@@ -56,7 +57,7 @@ class IntroductionScreen extends StatelessWidget {
               SizedBox(height: 3.h),
               TextButton(
                 onPressed: () {
-                  Get.to(() => const IntroductionScreen());
+                  Get.to(() => LoginScreen());
                 },
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.white,
