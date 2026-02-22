@@ -1,77 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-class CustomTextFormField extends StatefulWidget {
+class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
     required this.controller,
-    required this.fieldType,
+    required this.hintText,
+    required this.validator,
+    this.suffixIcon,
+    required this.borderColor,
   });
 
   final TextEditingController controller;
-  final String fieldType;
-
-  @override
-  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
-}
-
-class _CustomTextFormFieldState extends State<CustomTextFormField> {
-  bool isValid = false;
-
-  String? validator(String? value) {
-    if (value != null && value.isNotEmpty) {
-      setState(() {
-        isValid = true;
-      });
-      return null;
-    } else {
-      setState(() {
-        isValid = false;
-      });
-      return "";
-    }
-  }
+  final String hintText;
+  final String? Function(String?)? validator;
+  final Widget? suffixIcon;
+  final Color borderColor;
 
   @override
   Widget build(BuildContext context) {
-    final isPassword = widget.fieldType.contains("Password");
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 6.w),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.only(left: 2.w),
-            child: Text(
-              widget.fieldType,
-              style: TextStyle(
-                fontSize: 17.sp,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
           SizedBox(height: 1.h),
           TextFormField(
-            controller: widget.controller,
+            controller: controller,
             validator: validator,
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(4.w),
               ),
               enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: isValid ? Colors.green : Colors.grey,
-                  width: 1,
-                ),
+                borderSide: BorderSide(color: borderColor, width: 1),
                 borderRadius: BorderRadius.circular(4.w),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: isValid ? Colors.green : Colors.blue,
-                  width: 1.5,
-                ),
+                borderSide: BorderSide(color: borderColor, width: 1.5),
                 borderRadius: BorderRadius.circular(4.w),
               ),
               errorBorder: OutlineInputBorder(
@@ -85,30 +52,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               filled: true,
               fillColor: Colors.grey[100],
               hintStyle: TextStyle(fontSize: 17.sp, color: Colors.grey[600]),
-              hintText: isPassword ? "************" : "example@example.com",
-              suffix: isPassword
-                  ? SizedBox(
-                      width: 2.5.h,
-                      height: 2.5.h,
-                      child: Center(
-                        child: IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.visibility,
-                            size: 2.5.h,
-                          ), //TODO: Fix text field height when suffix is added
-                        ),
-                      ),
-                    )
-                  : null,
+              hintText: hintText,
+              suffixIcon: suffixIcon,
               errorStyle: const TextStyle(fontSize: 0, height: 0),
             ),
-            style: TextStyle(
-              fontSize: 17.sp,
-              color: isValid ? Colors.green : Colors.black,
-            ),
-            obscureText: isPassword,
+            style: TextStyle(fontSize: 17.sp, color: borderColor),
+            obscureText: suffixIcon != null,
             obscuringCharacter: "*",
             onChanged: validator,
           ),

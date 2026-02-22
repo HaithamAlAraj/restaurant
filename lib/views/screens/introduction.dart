@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:restaurant/views/screens/login.dart';
+import 'package:restaurant/views/screens/auth/login.dart';
 import 'package:sizer/sizer.dart';
 
 class IntroductionScreen extends StatelessWidget {
