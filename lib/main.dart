@@ -17,6 +17,10 @@ class MyApp extends StatelessWidget {
           title: 'Restaurant App',
           debugShowCheckedModeBanner: false,
           home: const SplashScreen(),
+          theme: Theme.of(context).copyWith(
+            scaffoldBackgroundColor: Colors.white,
+            textTheme: Theme.of(context).textTheme.apply(fontFamily: 'Poppins'),
+          ),
         );
       },
     );

@@ -1,10 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:restaurant/views/screens/main/home.dart';
+import 'package:restaurant/views/screens/main/dashboard.dart';
 import 'package:restaurant/views/screens/auth/login.dart';
 import 'package:restaurant/views/widgets/media_login_button.dart';
-import 'package:restaurant/views/widgets/text_field.dart';
+import 'package:restaurant/views/widgets/custom_text_form_field.dart';
 import 'package:restaurant/views/widgets/title_of_text_field.dart';
 import 'package:sizer/sizer.dart';
 
@@ -31,7 +31,7 @@ class _SignupScreenState extends State<SignupScreen> {
         backgroundColor: Colors.green,
         colorText: Colors.white,
       );
-      Get.to(() => const HomeScreen());
+      Get.offAll(() => const DashboardScreen());
     }
   }
 
@@ -39,14 +39,16 @@ class _SignupScreenState extends State<SignupScreen> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      child: Scaffold(
-        body: Center(
+    return Scaffold(
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -162,7 +164,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Get.to(() => const LoginScreen());
+                                Get.offAll(() => const LoginScreen());
                               },
                           ),
                         ],
