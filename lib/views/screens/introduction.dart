@@ -57,7 +57,7 @@ class IntroductionScreen extends StatelessWidget {
               SizedBox(height: 3.h),
               TextButton(
                 onPressed: () {
-                  Get.to(() => LoginScreen());
+                  Get.offAll(() => LoginScreen());
                 },
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.white,

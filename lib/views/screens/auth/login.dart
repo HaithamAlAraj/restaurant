@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:restaurant/views/screens/auth/forgot_password.dart';
-import 'package:restaurant/views/screens/main/home.dart';
+import 'package:restaurant/views/screens/main/dashboard.dart';
 import 'package:restaurant/views/screens/auth/signup.dart';
 import 'package:restaurant/views/widgets/media_login_button.dart';
 import 'package:restaurant/views/widgets/text_field.dart';
@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: Colors.green,
         colorText: Colors.white,
       );
-      Get.to(() => const HomeScreen());
+      Get.offAll(() => const DashboardScreen());
     }
   }
 

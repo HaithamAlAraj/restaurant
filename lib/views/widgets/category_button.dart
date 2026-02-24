@@ -22,16 +22,14 @@ class CategoryButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: isSelected ? Colors.black : Colors.grey[100],
           borderRadius: BorderRadius.circular(50.sp),
-          boxShadow: isSelected
-              ? [
-                  BoxShadow(
-                    color: Colors.grey.withAlpha(150),
-                    spreadRadius: 3,
-                    blurRadius: 10,
-                    offset: const Offset(0, 3),
-                  ),
-                ]
-              : null,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withAlpha(150),
+              spreadRadius: 1,
+              blurRadius: 3,
+              offset: const Offset(0, 3),
+            ),
+          ],
         ),
         child: Column(
           children: [

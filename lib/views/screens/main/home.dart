@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:restaurant/views/widgets/category_button.dart';
 import 'package:restaurant/views/widgets/home_part_title.dart';
 import 'package:restaurant/views/widgets/popular_card.dart';
+import 'package:restaurant/views/widgets/restaurant_card.dart';
+import 'package:restaurant/views/widgets/search_text_field.dart';
 import 'package:sizer/sizer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -21,6 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   int selectedCategoryIndex = 0;
 
+  final TextEditingController searchController = TextEditingController();
+
   void selectCategory(int index) {
     setState(() {
       selectedCategoryIndex = index;
@@ -38,12 +42,32 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 15.h),
+              SizedBox(height: 2.5.h),
+              Row(
+                children: [
+                  Expanded(
+                    child: SearchTextField(controller: searchController),
+                  ),
+                  SizedBox(width: 4.w),
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.grey[100],
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(4.4.w),
+                      child: Icon(Icons.notifications_none),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 2.5.h),
               const HomePartTitle(title: "Categories"),
               SizedBox(height: 2.5.h),
               SizedBox(
                 height: 18.h,
                 child: ListView.builder(
+                  clipBehavior: Clip.none,
                   scrollDirection: Axis.horizontal,
                   itemCount: categories.length,
                   itemBuilder: (context, index) => Row(
@@ -62,6 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const HomePartTitle(title: "Popular this week"),
               SizedBox(height: 2.5.h),
               SingleChildScrollView(
+                clipBehavior: Clip.none,
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
@@ -93,6 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 18.h,
                   enlargeCenterPage: true,
                   viewportFraction: 0.9,
+                  autoPlay: true,
                 ),
                 items:
                     [
@@ -111,6 +137,36 @@ class _HomeScreenState extends State<HomeScreen> {
                     }).toList(),
               ),
               SizedBox(height: 2.5.h),
+              HomePartTitle(title: "Popular Restaurants"),
+              SizedBox(height: 2.5.h),
+              SingleChildScrollView(
+                clipBehavior: Clip.none,
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    RestaurantCard(
+                      imagePath: "assets/images/mcdonalds_logo.png",
+                      title: "McDonald's",
+                      timeNeeded: "15mins",
+                      onTap: () {},
+                    ),
+                    SizedBox(width: 3.w),
+                    RestaurantCard(
+                      imagePath: "assets/images/wendys_logo.png",
+                      title: "Wendy's",
+                      timeNeeded: "25mins",
+                      onTap: () {},
+                    ),
+                    SizedBox(width: 3.w),
+                    RestaurantCard(
+                      imagePath: "assets/images/popeyes_logo.png",
+                      title: "Popeyes",
+                      timeNeeded: "25mins",
+                      onTap: () {},
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
