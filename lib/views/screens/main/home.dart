@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:restaurant/views/screens/main/restaurant.dart';
 import 'package:restaurant/views/widgets/category_button.dart';
 import 'package:restaurant/views/widgets/home_part_title.dart';
 import 'package:restaurant/views/widgets/popular_card.dart';
@@ -150,7 +152,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         imagePath: "assets/images/mcdonalds_logo.png",
                         title: "McDonald's",
                         timeNeeded: "15mins",
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(() => RestaurantScreen());
+                        },
                       ),
                       SizedBox(width: 3.w),
                       RestaurantCard(
