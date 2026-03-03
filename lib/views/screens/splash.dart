@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+import 'package:restaurant/controllers/auth_provider.dart';
 import 'package:restaurant/views/screens/introduction.dart';
+import 'package:restaurant/views/screens/main/dashboard.dart';
 import 'package:sizer/sizer.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,13 +17,17 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    delay();
+    checkAuthStatus();
   }
 
-  void delay() {
-    Future.delayed(
-      const Duration(seconds: 3),
-      () => Get.offAll(() => const IntroductionScreen()),
+  Future<void> checkAuthStatus() async {
+    final authProvider = context.read<AuthProvider>();
+    await authProvider.initialize();
+
+    Get.offAll(
+      () => authProvider.isLoggedIn
+          ? const DashboardScreen()
+          : const IntroductionScreen(),
     );
   }
 

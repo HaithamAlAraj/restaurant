@@ -16,6 +16,8 @@ dependencies:
   get: ^4.7.3
   carousel_slider: ^5.1.2
   pin_code_fields: ^9.1.0
+  shared_preferences: ^2.2.2
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:
